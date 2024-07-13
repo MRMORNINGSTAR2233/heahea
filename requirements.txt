@@ -1,0 +1,11 @@
+Flask           # Web framework for building the application
+pandas          # Data manipulation library
+scikit-learn   # Machine learning library for disease prediction
+openai        # OpenAI GPT-3 API library
+langchain
+pypdf
+pillow
+PyMuPDF
+pytesseract
+PyPDF2
+python-dotenv

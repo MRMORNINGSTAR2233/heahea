@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai-Medic</title>
+
+    <!-- Add the link to your Tailwind CSS stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Left Side - Ai-Medic Title (Clickable to Home Page) -->
+            <a href="{{ url_for('home') }}" class="text-white text-2xl font-bold hover:underline">Ai-Medic</a>
+
+            <!-- Right Side - Navigation Links -->
+            <div class="space-x-4">
+                <a href="{{ url_for('index') }}" class="text-white hover:underline">Medical Chatbot</a>
+                <a href="{{ url_for('mental') }}" class="text-white hover:underline">Mental Health Bot</a>
+                <a href="{{ url_for('ask') }}" class="text-white hover:underline">Record Info</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Area -->
+    <div class="container mx-auto p-8">
+        <!-- Introduction Section -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold mb-4">Welcome to Ai-Medic!</h2>
+            <p>Explore our intelligent AI-powered bots designed to assist and provide valuable insights in different
+                domains of healthcare. Choose a bot based on your needs and get started on your journey to better
+                health.</p>
+        </section>
+
+        <!-- Medical Chatbot Section -->
+        <section class="mb-8 flex items-center">
+            <div class="w-1/2 pr-4">
+                <img src= "{{ url_for('static', filename='images/medicalchat.jpg') }}" alt="Medical Chatbot Image" class="w-full h-auto">
+            </div>
+            <div class="w-1/2">
+                <h2 class="text-2xl font-bold mb-4">Medical Chatbot</h2>
+                <p>Our Medical Chatbot is your virtual health companion. It can assist you with general medical queries,
+                    provide information on symptoms, and guide you towards appropriate healthcare resources. Experience
+                    personalized and reliable healthcare advice at your fingertips.</p>
+            </div>
+        </section>
+
+        <!-- Mental Health Bot Section -->
+        <section class="mb-8 flex items-center">
+            <div class="w-1/2">
+                <h2 class="text-2xl font-bold mb-4">Mental Health Bot</h2>
+                <p>Prioritize your mental well-being with our Mental Health Bot. It's designed to offer support,
+                    guidance, and a listening ear. Engage in conversations that promote positive mental health and
+                    receive thoughtful responses tailored to your emotional needs.</p>
+            </div>
+            <div class="w-1/2 pl-4">
+                <img src= "{{ url_for('static', filename='images/mental.jpg') }}" alt="Mental Health Bot Image" class="w-full h-auto">
+            </div>
+        </section>
+
+        <!-- Disease Predictor Section -->
+        <section class="flex items-center">
+            <div class="w-1/2 pr-4">
+                <img src= "{{ url_for('static', filename='images/diseasepredi.jpg') }}" alt="Disease Predictor Image" class="w-full h-auto">
+            </div>
+            <div class="w-1/2">
+                <h2 class="text-2xl font-bold mb-4">Disease Predictor</h2>
+                <p>Empower yourself with our Disease Predictor. Input your symptoms, and our advanced AI algorithms will
+                    analyze the data to provide predictions about potential health conditions. While it's not a
+                    substitute for professional medical advice, it can offer valuable insights for further consultation.
+                </p>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai-Medic</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navigation Bar -->
+        <nav class="bg-blue-500 p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <!-- Left Side - Ai-Medic Title -->
+                <a href="{{ url_for('home') }}" class="text-white text-2xl font-bold hover:underline">Ai-Medic</a>
+                <!-- Right Side - Navigation Links -->
+                <div class="space-x-4">
+                    <a href="{{ url_for('index') }}" class="text-white hover:underline">Medical Chatbot</a>
+                    <a href="{{ url_for('mental') }}" class="text-white hover:underline">Mental Health Bot</a>
+                    <a href="{{ url_for('ask') }}" class="text-white hover:underline">Record Info</a>
+                </div>
+            </div>
+        </nav>
+
+    <!-- Chat Container -->
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full p-4 bg-white rounded-md shadow-md">
+            <h1 class="text-3xl sm:text-2xl md:text-3xl font-bold mb-4">Medical Health Bot</h1>
+            <form id="question-form" class="space-y-4">
+                <div class="form-group">
+                    <label for="question" class="block text-sm font-medium text-gray-700">Ask a question:</label>
+                    <textarea class="form-control w-full border border-gray-300 p-2 rounded-md text-sm sm:text-base"
+                        id="question" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="pdf" class="block text-sm font-medium text-gray-700">Upload a PDF:</label>
+                    <input type="file"
+                        class="form-control-file w-full border border-gray-300 p-2 rounded-md text-sm sm:text-base"
+                        id="pdf">
+                </div>
+                <div class="form-group">
+                    <label for="image" class="block text-sm font-medium text-gray-700">Upload an Image:</label>
+                    <input type="file"
+                        class="form-control-file w-full border border-gray-300 p-2 rounded-md text-sm sm:text-base"
+                        id="image">
+                </div>
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-md text-sm sm:text-base">Submit</button>
+            </form>
+            <div id="response" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('question-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const question = document.getElementById('question').value;
+            const pdf = document.getElementById('pdf').files[0];
+            const image = document.getElementById('image').files[0];
+
+            const formData = new FormData();
+            formData.append('question', question);
+            if (pdf) {
+                formData.append('pdf', pdf);
+            }
+            if (image) {
+                formData.append('image', image);
+            }
+
+            try {
+                const response = await axios.post('/ask', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+
+                document.getElementById('response').innerHTML = `
+                    <h4 class="text-xl font-semibold">Answer:</h4>
+                    <p class="text-gray-700">${response.data.answer}</p>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('response').innerHTML = `
+                    <h4 class="text-xl font-semibold">Error:</h4>
+                    <p class="text-red-500">There was an error processing your request. Please try again.</p>
+                `;
+            }
+        });
+    </script>
+</body>
+
+</html>
